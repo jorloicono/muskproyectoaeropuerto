@@ -3,8 +3,6 @@ class Lector:
     def __init__(self, path: str):
         self.path = path
 
-    def _comprueba_extension(self, extension):
-        pass
 
     def lee_archivo(self):
         pass
