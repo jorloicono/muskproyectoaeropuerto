@@ -3,31 +3,6 @@ import pandas as pd
 from entities.lector import LectorCSV, LectorJSON, LectorTXT
 from entities.aeropuerto import Aeropuerto
 
-
-def preprocess_data(df_list):
-    """
-    Combines multiple DataFrames and cleans the data.
-    Converts date columns and handles missing values.
-    """
-    if not df_list:
-        return pd.DataFrame()
-    
-    # Combine all DataFrames
-    combined_df = pd.concat(df_list, ignore_index=True)
-    
-    # Convert fecha_llegada to datetime if it's not already
-    if 'fecha_llegada' in combined_df.columns:
-        combined_df['fecha_llegada'] = pd.to_datetime(combined_df['fecha_llegada'])
-    
-    # Sort by arrival time
-    combined_df = combined_df.sort_values('fecha_llegada').reset_index(drop=True)
-    
-    # Add index as flight order
-    combined_df['orden_llegada'] = range(1, len(combined_df) + 1)
-    
-    return combined_df
-
-
 if __name__ == '__main__':
     # File paths
     path_1 = os.path.abspath('./data/vuelos_1.txt')
